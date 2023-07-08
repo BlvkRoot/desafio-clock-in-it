@@ -53,6 +53,21 @@ BODY {
 DELETE /products/:id
 ```
 
+### Orders
+
+```
+
+GET /orders
+
+POST /orders
+BODY {
+  clientId: number,
+  productId: number
+}
+
+
+```
+
 #### TECNOLOGIAS USADAS
 
 :arrow_forward: NestJS + TYPESCRIPT + TYPEORM + SQLITE + JEST

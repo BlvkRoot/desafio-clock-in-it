@@ -3,7 +3,7 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { IDataServices } from '../../../core';
 import { DATA_BASE_CONFIGURATION } from '../../../configuration';
 import {
-  Client, Product
+  Client, Orders, Product
 } from './model';
 import { TypeormDataServices } from './typeorm-data-services.service';
 
@@ -11,7 +11,8 @@ import { TypeormDataServices } from './typeorm-data-services.service';
   imports: [
     TypeOrmModule.forFeature([
       Client,
-      Product
+      Product,
+      Orders
     ]),
     TypeOrmModule.forRoot(DATA_BASE_CONFIGURATION as TypeOrmModuleOptions),
   ],

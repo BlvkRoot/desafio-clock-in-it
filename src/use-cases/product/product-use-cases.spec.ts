@@ -7,7 +7,9 @@ describe("ClientUseCases", () => {
 
   const mockProductRepository = {
     products: {
-      create: jest.fn().mockImplementation((dto) => ({ id: Date.now(), ...dto })),
+      create: jest
+        .fn()
+        .mockImplementation((dto) => ({ id: Date.now(), ...dto })),
       update: jest.fn().mockImplementation((id, dto) => ({ id, ...dto })),
     },
   };
@@ -36,11 +38,10 @@ describe("ClientUseCases", () => {
       description: "Banana test",
       price: 389.02,
     };
-    
+
     expect(await productUseCase.create(productDto)).toEqual({
       id: expect.any(Number),
       ...productDto,
     });
   });
-
 });

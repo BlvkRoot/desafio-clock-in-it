@@ -1,12 +1,12 @@
 import { Test, TestingModule } from "@nestjs/testing";
-import { ClientUseCases } from "./client-use-case";
+import { OrderUseCases } from "./order-use-case";
 import { IDataServices } from "../../core";
 
 describe("ClientUseCases", () => {
-  let clientUseCase: ClientUseCases;
+  let orderUseCase: OrderUseCases;
 
-  const mockClientRepository = {
-    clients: {
+  const mockOrderRepository = {
+    orders: {
       create: jest
         .fn()
         .mockImplementation((dto) => ({ id: Date.now(), ...dto })),
@@ -17,31 +17,31 @@ describe("ClientUseCases", () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        ClientUseCases,
+        OrderUseCases,
         {
           provide: IDataServices,
-          useValue: mockClientRepository,
+          useValue: mockOrderRepository,
         },
       ],
     }).compile();
 
-    clientUseCase = module.get<ClientUseCases>(ClientUseCases);
+    orderUseCase = module.get<OrderUseCases>(OrderUseCases);
   });
 
   it("should be defined", () => {
-    expect(clientUseCase).toBeDefined();
+    expect(orderUseCase).toBeDefined();
   });
 
-  it("should create a new client and return record", async () => {
-    const clientDto = {
-      name: "John Doe",
-      phone: "12345",
-      address: "38 Main Street",
+  it("should create a new order and return record", async () => {
+    const orderDto = {
+      clientId: 1,
+      productId: 3,
     };
 
-    expect(await clientUseCase.create(clientDto)).toEqual({
+    expect(await orderUseCase.create(orderDto)).toEqual({
       id: expect.any(Number),
-      ...clientDto,
+      clientId: orderDto.clientId,
+      productId: orderDto.productId,
     });
   });
 });
