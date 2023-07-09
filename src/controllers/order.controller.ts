@@ -1,9 +1,4 @@
-import {
-  Controller,
-  Post,
-  Body,
-  Get
-} from "@nestjs/common";
+import { Controller, Post, Body, Get, Param } from "@nestjs/common";
 import { CreateOrderDto } from "../core/dtos";
 import { OrderUseCases } from "../use-cases/order/order-use-case";
 
@@ -11,7 +6,7 @@ import { OrderUseCases } from "../use-cases/order/order-use-case";
 export class OrderController {
   constructor(private orderUseCases: OrderUseCases) {}
 
-  @Get('/products')
+  @Get("/products")
   async getAll() {
     return this.orderUseCases.getAllOrders();
   }
@@ -21,4 +16,8 @@ export class OrderController {
     return this.orderUseCases.create(orderDto);
   }
 
+  @Get("/clients/:id/products")
+  async getAllClientProducts(@Param("id") id: string) {
+    return this.orderUseCases.getAllOrdersByClientId(+id);
+  }
 }

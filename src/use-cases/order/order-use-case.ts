@@ -13,6 +13,10 @@ export class OrderUseCases {
     return this.orderRepository.getAllOrderProducts();
   }
 
+  async getAllOrdersByClientId(clientId: number): Promise<Orders[]> {
+    return this.orderRepository.getAllOrderProductsByClientId(clientId);
+  }
+
   async create({ clientId, productId }: CreateOrderDto): Promise<Orders> {
     const clientExists = await this.dataServices.clients.findOne(clientId);
     const productExists = await this.dataServices.products.findOne(productId);

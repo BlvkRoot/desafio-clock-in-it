@@ -57,13 +57,17 @@ DELETE /products/:id
 
 ```
 
-GET /orders
+// List sold products
+GET /orders/products
 
 POST /orders
 BODY {
   clientId: number,
   productId: number
 }
+
+// List all client's product orders
+GET /orders/clients/:id/products
 
 
 ```

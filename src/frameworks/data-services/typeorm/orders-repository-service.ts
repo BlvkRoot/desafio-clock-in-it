@@ -17,4 +17,12 @@ export class OrdersRepositoryService implements IOrdersRepository {
       .leftJoinAndSelect("orders.product", "product")
       .getMany();
   }
+
+  getAllOrderProductsByClientId(clientId: number): Promise<Orders[]> {
+    return this.orderRepository
+      .createQueryBuilder("orders")
+      .leftJoinAndSelect("orders.product", "product")
+      .where("orders.clientId = :clientId", { clientId })
+      .getMany();
+  }
 }
