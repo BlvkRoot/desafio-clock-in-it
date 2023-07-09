@@ -11,7 +11,7 @@ import { OrderUseCases } from "../use-cases/order/order-use-case";
 export class OrderController {
   constructor(private orderUseCases: OrderUseCases) {}
 
-  @Get()
+  @Get('/products')
   async getAll() {
     return this.orderUseCases.getAllOrders();
   }

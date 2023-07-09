@@ -5,11 +5,12 @@ import {
   OneToMany,
   CreateDateColumn,
   JoinColumn,
+  OneToOne,
 } from "typeorm";
 import { Client } from "./client.model";
 import { Product } from "./product.model";
 
-@Entity()
+@Entity('orders')
 export class Orders {
   @PrimaryGeneratedColumn()
   id: number;
@@ -17,14 +18,14 @@ export class Orders {
   @Column()
   clientId: number;
 
-  @OneToMany(() => Client, (client) => client.orders)
+  @OneToOne(() => Client, (client) => client.order)
   @JoinColumn({ name: "clientId" })
   client: Client;
 
   @Column()
   productId: number;
 
-  @OneToMany(() => Product, (product) => product.orders)
+  @OneToOne(() => Product, (product) => product.order)
   @JoinColumn({ name: "productId" })
   product: Product;
 

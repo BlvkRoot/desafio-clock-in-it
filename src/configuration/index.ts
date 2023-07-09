@@ -4,6 +4,6 @@ export const DATA_BASE_CONFIGURATION = {
   type: "sqlite",
   database: "db.sqlite",
   entities: [join(`${__dirname}\\..`, '**', '*.model.{ts,js}')],
-  migrations: ['dist/db/migrations/*.js'],
-  synchronize: true,
+  migrations: ['dist/db/migrations/*.{ts,js}'],
+  // synchronize: true,
 };

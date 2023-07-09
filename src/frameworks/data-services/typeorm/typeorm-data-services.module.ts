@@ -6,6 +6,8 @@ import {
   Client, Orders, Product
 } from './model';
 import { TypeormDataServices } from './typeorm-data-services.service';
+import { IOrdersRepository } from './orders-repository-interface';
+import { OrdersRepositoryService } from './orders-repository-service';
 
 @Module({
   imports: [
@@ -21,7 +23,11 @@ import { TypeormDataServices } from './typeorm-data-services.service';
       provide: IDataServices,
       useClass: TypeormDataServices,
     },
+    {
+      provide: IOrdersRepository,
+      useClass: OrdersRepositoryService,
+    }
   ],
-  exports: [IDataServices],
+  exports: [IDataServices, IOrdersRepository],
 })
 export class TypeormDataServicesModule {}

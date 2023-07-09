@@ -3,13 +3,14 @@ import { Orders } from "../../core/entities";
 import { IDataServices } from "../../core/abstracts";
 import { CreateOrderDto } from "../../core/dtos";
 import { OrderFactoryService } from "./order-factory.service";
+import { IOrdersRepository } from "../../frameworks/data-services/typeorm/orders-repository-interface";
 
 @Injectable()
 export class OrderUseCases {
-  constructor(private dataServices: IDataServices) {}
+  constructor(private dataServices: IDataServices, private orderRepository: IOrdersRepository) {}
 
   async getAllOrders(): Promise<Orders[]> {
-    return this.dataServices.orders.getAll();
+    return this.orderRepository.getAllOrderProducts();
   }
 
   async create({ clientId, productId }: CreateOrderDto): Promise<Orders> {

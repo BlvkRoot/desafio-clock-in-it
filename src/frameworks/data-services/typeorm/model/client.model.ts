@@ -1,7 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm"
 import { Orders } from "./orders.model"
 
-@Entity()
+@Entity('clients')
 export class Client {
     @PrimaryGeneratedColumn()
     id: number
@@ -17,6 +17,6 @@ export class Client {
     })
     address: string
 
-    @ManyToOne(() => Orders, order => order.product)
-    orders: Orders[]
+    @OneToOne(() => Orders, order => order.client)
+    order: Orders
 }
