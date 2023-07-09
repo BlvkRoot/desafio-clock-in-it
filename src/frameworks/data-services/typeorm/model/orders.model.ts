@@ -2,15 +2,14 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  OneToMany,
-  CreateDateColumn,
   JoinColumn,
   OneToOne,
+  BeforeInsert,
 } from "typeorm";
 import { Client } from "./client.model";
 import { Product } from "./product.model";
 
-@Entity('orders')
+@Entity("orders")
 export class Orders {
   @PrimaryGeneratedColumn()
   id: number;
@@ -29,6 +28,11 @@ export class Orders {
   @JoinColumn({ name: "productId" })
   product: Product;
 
-  @CreateDateColumn()
-  date: Date;
+  @Column({ type: "date" })
+  date: string;
+
+  @BeforeInsert()
+  updateDates() {
+    this.date = new Date().toISOString().split("T")[0];
+  }
 }

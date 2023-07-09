@@ -24,8 +24,7 @@ export class CreateOrdersTableMigration1688864614732 implements MigrationInterfa
               },
               {
                 name: "date",
-                type: "timestamp",
-                default: "now()",
+                type: "string"
               },
             ],
             foreignKeys: [
